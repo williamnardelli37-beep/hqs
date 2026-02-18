@@ -1,251 +1,268 @@
-/* --- 1. BASE MODERNA CYBER-MANGA --- */
+/* --- 1. CONFIGURAÇÕES GLOBAIS --- */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    --neon-cyan: #00f3ff;
+    --noir-black: #08080a;
+    --vintage-white: #fdfbf7;
+    --hq-shadow: 10px 10px 0px rgba(0, 0, 0, 0.8);
 }
 
 body {
-    background-color: #0d0d0f;
+    background-color: var(--noir-black);
+    color: #e0e0e0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #ffffff;
-    line-height: 1.6;
+    width: 100%;
 }
 
-/* Fundo sutil com Grid minimalista */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100vh;
-    background-image: linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: -1;
-}
-
-/* --- 2. BANNER ESTRUTURADO (TECH-MANGA) --- */
-.admin-banner {
-    width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 40px;
-    background: linear-gradient(135deg, #16161a 0%, #0d0d0f 100%);
-    border: 1px solid rgba(0, 243, 255, 0.2);
-    border-left: 5px solid #00f3ff;
-    border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-.admin-content h1 {
-    font-size: clamp(2rem, 6vw, 3.5rem); /* Título grande e responsivo */
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin: 0 0 15px 0;
-    color: #ffffff;
-    line-height: 1.1;
-}
-
-.admin-description {
-    color: #94a3b8;
-    font-size: 1.1rem;
-    max-width: 800px;
-}
-
-/* --- 3. CARROSSEL (FILEIRA DE ARRASTO) --- */
-.imgg {
+/* --- 2. HEADER ADAPTATIVO (PC/MAC/MOBILE) --- */
+/* --- 1. HEADER CONTAINER ADAPTATIVO --- */
+.header-container {
     display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
+    justify-content: space-between;
+    align-items: center;
+    /* Padding dinâmico: menor no mobile, maior no PC */
+    padding: clamp(20px, 5vw, 60px) 8%; 
+    background-color: #000000;
     gap: 20px;
-    padding: 40px 5%; /* Padding lateral para ver a próxima imagem no mobile */
-    scrollbar-width: none; /* Esconde barra no Firefox */
+    width: 100%;
 }
 
-.imgg::-webkit-scrollbar { 
-    display: none; /* Esconde barra no Chrome/Safari */
+/* Ajuste para Telefone: Empilha o título e a animação */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 5%;
+    }
 }
 
-.imgg img {
-    flex: 0 0 220px; /* Tamanho fixo para permitir o scroll horizontal */
-    height: 320px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 2px solid rgba(0, 243, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.2, 1, 0.3, 1);
-    cursor: pointer;
-    scroll-snap-align: center;
-    filter: grayscale(20%);
+/* --- 2. TÍTULO PRINCIPAL --- */
+.header-container h1 {
+    font-family: 'Playfair Display', serif;
+    /* Fonte escala entre 1.8rem e 3.8rem dependendo da tela */
+    font-size: clamp(1.8rem, 6vw, 3.8rem);
+    color: #ffffffd7;
+    margin: 0;
+    line-height: 1.2;
 }
 
-.imgg img:hover {
-    transform: translateY(-10px) scale(1.05);
-    border-color: #00f3ff;
-    filter: grayscale(0%);
-    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
-}
-
-/* --- 4. SEÇÃO DE COMPRA (COMPRA-MANGA) --- */
-.compra-manga {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 80px 20px;
-}
-
-.compra-manga h1 {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.btn-manga-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 50px;
-    background: rgba(0, 243, 255, 0.05);
-    color: #00f3ff !important;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.2rem;
+/* --- 3. ÁREA DA ANIMAÇÃO (TEXTO + ÍCONE) --- */
+.header-container h2 {
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.6rem);
+    color: #ffffffc5;
+    font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border: 2px solid #00f3ff;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.btn-manga-link:hover {
-    background: #00f3ff;
-    color: #0d0d0f !important;
-    box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
-    transform: translateY(-3px);
-}
-
-/* --- 5. ADAPTAÇÃO PARA PC (TELAS GRANDES) --- */
-@media (min-width: 1024px) {
-    .imgg {
-        padding: 50px 10%; /* Mais centralizado no PC */
-    }
-    
-    .imgg img {
-        flex: 0 0 280px; /* Imagens maiores no monitor */
-        height: 400px;
-    }
-}
-
-/* --- 6. ADAPTAÇÃO PARA TELEFONE (MOBILE) --- */
-@media (max-width: 768px) {
-    .admin-banner {
-        width: 95%;
-        padding: 30px 20px;
-        margin: 20px auto;
-    }
-
-    .admin-content h1 {
-        font-size: 1.8rem;
-    }
-
-    .imgg img {
-        flex: 0 0 180px; /* Tamanho ideal para tela de celular */
-        height: 260px;
-    }
-
-    .btn-manga-link {
-        width: 100%; /* Botão ocupa a largura toda no celular */
-        justify-content: center;
-        padding: 15px 20px;
-        font-size: 1rem;
-    }
-}
-/* --- 7. SEÇÃO DE COMPRA CYBER-HQ --- */
-.compra-hq {
+    margin: 0;
+    position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+    /* REMOVIDO min-width fixo para não quebrar no celular */
+    width: clamp(250px, 40vw, 380px); 
+    height: clamp(120px, 15vw, 160px); 
+}
+
+/* Estilo do TEXTO Animado */
+.header-container h2 span {
+    position: absolute;
+    white-space: nowrap;
+    animation: blurCiclo 4.0s infinite ease-in-out;
     text-align: center;
-    padding: 80px 20px;
-    margin-top: 20px;
-    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.02));
+}
+
+/* Estilo da IMAGEM Animada */
+.header-container h2::after {
+    content: "";
+    position: absolute;
+    /* Tamanho da imagem adapta ao tamanho da tela */
+    width: clamp(100px, 12vw, 150px);  
+    height: clamp(100px, 12vw, 150px);
+    background-image: url('icone\ sebo\ .png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    opacity: 0;
+    filter: blur(15px);
+    animation: blurCiclo 4.0s infinite ease-in-out 2.0s;
+}
+
+/* --- 4. ANIMAÇÃO DE DESFOQUE OTIMIZADA --- */
+@keyframes blurCiclo {
+    0% {
+        opacity: 0;
+        filter: blur(12px); /* Blur levemente menor para performance mobile */
+        transform: scale(0.95);
+    }
+    15%, 45% {
+        opacity: 1;
+        filter: blur(0px);
+        transform: scale(1);
+    }
+    60%, 100% {
+        opacity: 0;
+        filter: blur(12px);
+        transform: scale(0.95);
+    }
+}
+
+/* Prevenção de borrão infinito em navegadores Safari (iPhone/Mac) */
+.header-container h2, 
+.header-container h2 span, 
+.header-container h2::after {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes blurCiclo {
+    0%, 100% { opacity: 0; filter: blur(12px); transform: scale(0.95); }
+    15%, 45% { opacity: 1; filter: blur(0px); transform: scale(1); }
+}
+
+/* --- 3. GALERIA HQ-SUSPENSE --- */
+.galeria-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 40px auto;
+    padding: 0 5px;
+}
+
+#galeria {
+    display: flex;
+    gap: clamp(15px, 2.5vw, 25px);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 30px 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
+}
+
+#galeria::-webkit-scrollbar { display: none; }
+
+#galeria img {
+    flex: 0 0 clamp(200px, 25vw, 280px);
+    height: clamp(300px, 35vw, 420px);
+    object-fit: cover;
+    border-radius: 4px;
+    filter: grayscale(100%) contrast(1.2) brightness(0.7);
+    border: 2px solid #333;
+    box-shadow: var(--hq-shadow);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+#galeria img:hover {
+    filter: grayscale(0%) contrast(1.1) brightness(1);
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+}
+
+/* --- 4. BOTÕES DE NAVEGAÇÃO (VISÍVEIS EM TUDO) --- */
+.btn-nav {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(40px, 12vw, 60px);
+    height: clamp(40px, 12vw, 60px);
+    background: rgba(8, 8, 10, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 50%;
+    color: var(--neon-cyan);
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    cursor: pointer;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-prev { left: 10px; }
+.btn-next { right: 10px; }
+
+@media (min-width: 1024px) {
+    .btn-prev { left: 30px; }
+    .btn-next { right: 30px; }
+}
+
+.btn-nav:hover {
+    background: var(--neon-cyan);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+}
+
+/* --- 5. SEÇÃO DE COMPRA (ESPAÇAMENTO CORRIGIDO) --- */
+.compra-hq {
+    text-align: center;
+    /* Adicionado padding maior para afastar de outras seções */
+    padding: clamp(80px, 15vw, 140px) 24px;
+    background: linear-gradient(to bottom, var(--noir-black), #000);
 }
 
 .compra-hq h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
     color: #ffffff;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    font-weight: 800;
+    letter-spacing: 1px;
+    /* Aumentada a distância entre o título e o botão */
+    margin-bottom: 40px; 
+    line-height: 1.3;
 }
 
-.compra-hq p {
-    color: #94a3b8;
-    font-size: 1.1rem;
-    margin-bottom: 35px;
-    max-width: 500px;
-    line-height: 1.6;
-}
-
-/* O BOTÃO QUE ESTAVA SEM CSS */
 .btn-cyber-hq {
     display: inline-flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
     padding: 20px 50px;
-    background: rgba(0, 243, 255, 0.05); /* Fundo sutil */
-    color: #00f3ff !important; /* Texto Ciano */
+    background: transparent;
+    color: var(--neon-cyan) !important;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
-    border: 2px solid #00f3ff;
-    border-radius: 4px;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+    border: 2px solid var(--neon-cyan);
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 5px 5px 0px rgba(0, 243, 255, 0.2);
+    /* Margem extra para garantir que não cole nas letras superiores */
+    margin-top: 10px; 
+}
+
+@media (min-width: 768px) {
+    .btn-cyber-hq { width: auto; }
 }
 
 .btn-cyber-hq:hover {
-    background: #00f3ff;
-    color: #0d0d0f !important; /* Inverte as cores no hover */
-    box-shadow: 0 0 35px rgba(0, 243, 255, 0.5);
-    transform: translateY(-5px);
+    background: var(--neon-cyan);
+    color: #0d0d0f !important;
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+    transform: translate(-3px, -3px);
 }
 
-/* Animação da seta interna */
 .seta-cyber {
-    font-size: 1.4rem;
-    transition: transform 0.3s ease;
+    margin-left: 10px;
+    transition: 0.3s;
 }
 
 .btn-cyber-hq:hover .seta-cyber {
-    transform: translateX(8px); /* A seta "foge" para a direita no hover */
-}
-
-/* AJUSTE PARA TELEFONE (MOBILE) */
-@media (max-width: 768px) {
-    .compra-hq {
-        padding: 50px 15px;
-    }
-
-    .btn-cyber-hq {
-        width: 100%; /* Botão largo no celular */
-        padding: 18px 20px;
-        justify-content: center;
-        font-size: 1rem;
-        letter-spacing: 1px;
-    }
-    
-    .compra-hq p {
-        font-size: 1rem;
-    }
+    transform: translateX(8px);
 }
